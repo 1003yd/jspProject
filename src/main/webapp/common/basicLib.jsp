@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
     
-<script src="/js/jquery/jquery-1.12.4.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
 <link href="/css/bootstrap.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
 <script src="/js/bootstrap.js"></script>

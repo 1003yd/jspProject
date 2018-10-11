@@ -3,8 +3,11 @@ package kr.or.ddit.user.service;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Map;
 
+import kr.or.ddit.user.dao.UserDao;
 import kr.or.ddit.user.model.UserVO;
+import kr.or.ddit.util.model.PageVO;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -58,7 +61,7 @@ public class UserServiceTest {
 		/***When***/
 		List<UserVO> userList = service.selectUserAll();
 		/***Then***/
-		assertEquals(5, userList.size());
+		assertEquals(105, userList.size());
 
 	}
 
@@ -87,6 +90,24 @@ public class UserServiceTest {
 		UserVO user = service.selectUser(userparameter);
 		/***Then***/
 		assertEquals(userparameter.getUserId(), user.getUserId());
+	}
+	
+	@Test
+	public void selectUsrPageListTest(){
+		/***Given***/
+
+		/***When***/
+		PageVO page = new PageVO();
+		page.setPage(1);
+		page.setPageSize(10);
+
+		Map<String, Object> resultMap = service.selectUserPageList(page);
+		List<UserVO> userList = (List<UserVO>) resultMap.get("userList");
+		
+		int pageCnt = (Integer)resultMap.get("pageCount");
+		/***Then***/
+		assertEquals(10,userList.size());
+		assertEquals(11, pageCnt);
 	}
 	
 	

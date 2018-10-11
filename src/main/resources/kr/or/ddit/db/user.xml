@@ -6,6 +6,7 @@
 	<select id="selectUserAll" resultType="userVo">
 		select * from jspuser
 	</select>
+	
 
 	<select id="selectUser" parameterType="String" resultType="userVo">
 		select * from jspuser
@@ -18,12 +19,20 @@
 		where userId = #{userId}
 	</select>
 
-	<select id="selectUsrPageList" parameterType="kr.or.ddit.util.model.PageVO" resultType="userVo">
-		select * from
-		(select rownum rnum, jspuser.* from jspuser
-		order by userId)
+	<select id="selectUsrPageList" parameterType="pageVo"
+		resultType="userVo">
+		select * from(
+		select rownum rnum ,a.*
+		from
+		(select jspuser.*
+		from jspuser
+		order by userId) a)
 		where rnum between #{page}*#{pageSize}-(#{pageSize}-1) and
-		#{page}*#{pageSize};
+		#{page}*#{pageSize}
 
+	</select>
+
+	<select id="getUserCnt" resultType="int">
+		select count(*) from jspuser
 	</select>
 </mapper>

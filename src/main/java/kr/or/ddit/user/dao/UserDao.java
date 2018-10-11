@@ -21,6 +21,9 @@ public class UserDao implements UserDaoInf {
 		List<UserVO> userList = session.selectList("user.selectUserAll");
 		int cntList = userList.size();
 		System.out.println(cntList);
+		session.rollback();
+		session.commit();
+		session.close();
 
 		return userList;
 	}
@@ -30,7 +33,10 @@ public class UserDao implements UserDaoInf {
 		SqlSession session = factory.openSession();
 
 		UserVO userVo = (UserVO)session.selectOne("user.selectUser", userid);
-
+		session.rollback();
+		session.commit();
+		session.close();
+		
 		return userVo;
 	}
 
@@ -40,7 +46,10 @@ public class UserDao implements UserDaoInf {
 		SqlSession session = factory.openSession();
 
 		UserVO userVoList = session.selectOne("user.selectUserByVo", userVo);
-
+		session.rollback();
+		session.commit();
+		session.close();
+		
 		return userVoList;
 
 	}
@@ -54,7 +63,28 @@ public class UserDao implements UserDaoInf {
 		for(UserVO uservo : pageUserList){
 			System.out.println(uservo.getUserId());
 		}
+		session.rollback();
+		session.commit();
+		session.close();
 		
 		return pageUserList;
+	}
+	
+	/**  
+	* Method   : getUserCnt 
+	* 작성자 : 1003yd 
+	* 변경이력 :  
+	* @return  
+	* Method 설명 : 사용자 전체 건수 조회 
+	*/
+	@Override
+	public int getUserCnt() {
+		// TODO Auto-generated method stub
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session = factory.openSession();
+		
+		int cntUserList = session.selectOne("user.getUserCnt");
+		
+		return cntUserList;
 	}
 }

@@ -8,12 +8,13 @@ public class UserVO {
 	private String pass;
 	private String addr1;
 	private String addr2;
-	private String zipcode;
+	private String zipcd;
 	private Date birth;
 	private String email;
 	private String tel;
 	private String profile;
 	private String alias;
+	private int rnum;
 	
 	
 	public  UserVO(){
@@ -71,12 +72,12 @@ public class UserVO {
 		this.addr2 = addr2;
 	}
 
-	public String getZipcode() {
-		return zipcode;
+	public String getZipcd() {
+		return zipcd;
 	}
 
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
+	public void setZipcd(String zipcd) {
+		this.zipcd = zipcd;
 	}
 
 	public String getEmail() {
@@ -101,6 +102,14 @@ public class UserVO {
 
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	@Override

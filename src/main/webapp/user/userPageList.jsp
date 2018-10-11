@@ -7,7 +7,36 @@
 <head>
 <%@ include file="/common/basicLib.jsp"%>
 
+<style type="text/css">
+	.userClick{
+		cursor : pointer;
+	}
+	
+</style>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		console.log("documnet.ready");
+		
+		//tr에 select(class="userClick")
+		$(".userClick").on("click", function(){
+			console.log("userClick");
+			var userId= $(this).children()[1].innerText;
+			
+			$("#userId").val(userId);
+			$("#frm").submit();
+		});
+	});
+		
+	
+	
+</script>
+
 </head>
+<form id="frm" action="/userDetail" method="get">
+	<input type="hidden" id="userId" name="userId">
+</form>
 
 <body>
 	<%@ include file="/common/header.jsp"%>
@@ -21,7 +50,7 @@
 					<div class="col-sm-8 blog-main">
 						<h2 class="sub-header">사용자</h2>
 						<div class="table-responsive">
-							<table class="table table-striped">
+							<table class="table table-striped table-hover">
 								<tr>
 									<th>번호</th>
 									<th>사용자 아이디</th>
@@ -29,17 +58,19 @@
 									<th>생일</th>
 								</tr>
 								<%
-									List<UserVO> userList = (List) request.getAttribute("userList");
-									int index = 0;
+									List<UserVO> userList = (List) request.getAttribute("pageUserList");
+									int index = 1;
 									for (UserVO uservo : userList) {
 										SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 								%>
-								<tr>
+								
+								<tr class="userClick">
 									<td><%=uservo.getRnum()%></td>
 									<td><%=uservo.getUserId()%></td>
 									<td><%=uservo.getName()%></td>
 									<td><%=sdf.format(uservo.getBirth())%></td>
 								</tr>
+								
 
 								<%
 									index++;
@@ -51,12 +82,24 @@
 						<a class="btn btn-default pull-right">사용자 등록</a>
 
 						<div class="text-center">
+
 							<ul class="pagination">
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
+								<li><a href="#" aria-label="Previous"> <span
+										aria-hidden="true">&laquo;</span>
+								</a></li>
+								<%
+								int pageCnt = (Integer)request.getAttribute("pageCnt");
+								for(int p = 1; p <= pageCnt ; p++){
+									
+								
+							%>
+								<li><a href="/userPageList?page=<%=p%>&pageSize=10"><%=p%></a></li>
+								<%
+								}
+								%>
+								<li><a href="/userPageList?page=<%=pageCnt%>&pageSize=10" aria-label="Next"> <span
+										aria-hidden="true">&raquo;</span>
+								</a></li>
 							</ul>
 						</div>
 					</div>
