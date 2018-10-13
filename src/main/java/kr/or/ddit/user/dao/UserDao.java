@@ -87,4 +87,40 @@ public class UserDao implements UserDaoInf {
 		
 		return cntUserList;
 	}
+	
+	/**  
+	* Method   : insertUser 
+	* 작성자 : 1003yd 
+	* 변경이력 :  
+	* @param userVo
+	* @return  
+	* Method 설명 : 사용자 등록
+	*/
+	@Override
+	public int insertUser(UserVO userVo) {
+		// TODO Auto-generated method stub
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session = factory.openSession();
+		
+		int insertCnt= session.insert("user.inserUser",userVo);
+		session.commit();
+		session.close();
+		
+		return insertCnt;
+	}
+
+	@Override
+	public int deleteUser(String userId) {
+		// TODO Auto-generated method stub
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session = factory.openSession();
+		
+		int deleteCnt= session.delete("user.deleteUser",userId);
+		
+		//자동커밋이 안되기 때문에 db상의 데이터가 변경 시 commit을 반드시 해야한다.
+		session.commit();
+		session.close();
+		
+		return deleteCnt;
+	}
 }

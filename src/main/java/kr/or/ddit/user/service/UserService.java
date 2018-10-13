@@ -50,4 +50,14 @@ public class UserService implements UserServiceInf{
 		return resultMap;
 	}
 
+	@Override
+	public int insertUser(UserVO userVo) {
+		// TODO Auto-generated method stub
+		return userDao.insertUser(userVo);
+	}
+
+
+	
+	
+
 }

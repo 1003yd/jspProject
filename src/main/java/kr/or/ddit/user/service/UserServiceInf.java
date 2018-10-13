@@ -24,4 +24,6 @@ public interface UserServiceInf {
 	*/
 	public Map<String, Object> selectUserPageList(PageVO page);
 
+	public int insertUser(UserVO userVo);
+
 }

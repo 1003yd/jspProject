@@ -2,13 +2,18 @@ package kr.or.ddit.user.service;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.db.SqlFactoryBuilder;
 import kr.or.ddit.user.dao.UserDao;
 import kr.or.ddit.user.model.UserVO;
 import kr.or.ddit.util.model.PageVO;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -109,6 +114,28 @@ public class UserServiceTest {
 		assertEquals(10,userList.size());
 		assertEquals(11, pageCnt);
 	}
+	
+	/*@Test
+	public int deleteUser(String userId) {
+		// TODO Auto-generated method stub
+		UserVO userVo = new UserVO();
+		userVo.setUserId("주연님");
+		userVo.setName("오늘 좀 ");
+		userVo.setAddr1("이쁘시네요");
+		userVo.setAddr2("물론");
+		GregorianCalendar gc = new GregorianCalendar(2018,7,8);
+		userVo.setBirth(new Date(gc.getTimeInMillis()));
+		userVo.setEmail("안경이요");
+		userVo.setPass("잘어울리시네요");
+		userVo.setTel("옷도 이쁘시네요");
+		userVo.setZipcd("1234");
+		
+		int deleteCnt =service.deleteUser(userVo.getUserId());
+		
+		assertEquals(1, deleteCnt);
+		
+		return deleteCnt;
+	}*/
 	
 	
 

@@ -36,21 +36,22 @@
 					</div>
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
+						
 						<div class="col-sm-10">
-							<label class="control-label"><%=user.getUserId()%></label>
+						<label for="userNm" class="col-sm-2 control-label"><%=user.getUserId()%></label>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">이름</label>
 						<div class="col-sm-10">
-							<label class="control-label"><%=user.getName()%></label>
+							<label class="control-label" ><%=user.getName()%></label>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">주소</label>
 						<div class="col-sm-10">
-							<label class="control-label"><%=user.getAddr1()%></label>
+							<label class="control-label" ><%=user.getAddr1()%></label>
 						</div>
 					</div>
 					<div class="form-group">
@@ -87,8 +88,20 @@
 							<label class="control-label">0<%=user.getTel()%></label>
 						</div>
 					</div>
+					
 
 				</form>
+				<form action="/userUpdateServlet" method="get">
+					<div class="form-group">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+							<input type="hidden" name="userId" value="<%=user.getUserId()%>">
+								<button type="submit" class="btn btn-default">수정</button>
+							</div>
+						</div>
+						<div class="col-sm-10"></div>
+					</div>
+					</form>
 			</div>
 		</div>
 	</div>

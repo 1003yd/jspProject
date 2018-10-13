@@ -35,4 +35,17 @@
 	<select id="getUserCnt" resultType="int">
 		select count(*) from jspuser
 	</select>
+	
+	<!-- 사용자 등록 -->
+	<insert id="inserUser" parameterType="userVo">
+		insert into jspuser (userId ,pass, name, addr1, addr2 , zipcd, email, tel, birth, profile) 
+		values (#{userId},#{pass}, #{name}, #{addr1},#{addr2},#{zipcd},#{email},#{tel},#{birth}, #{profile})
+	</insert>
+	
+	<delete id="deleteUser" parameterType="String">
+		delete from jspuser
+		where userId = #{userId}
+	</delete>
+	
+	
 </mapper>
