@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +31,36 @@ public class LoginServlet extends HttpServlet{
 		//1. 사용자 아이디, 비밀번호를 requset 객체에서 받아온다.
 		String userId = req.getParameter("userId"); 
 		String password = req.getParameter("password");
+		//remember-me 파라미터 받아서 sysout으로 출력
+		String rememberMe = req.getParameter("remember-me");
+		System.out.println(rememberMe);
+		
+		
+		//rememberMe == null : 아이디 기억 사용안함
+		if(rememberMe == null){
+			//setMaxAge(시간) => 게시글 중에 하루동안 안보기 같은거라 생각해! => 기간을 정해 놓고 저장하는거
+			//setMaxAge(0) => 0 값을 주게되면 무효화가 되어 쿠키에서 삭제가 된다. => 쿠키를 삭제하는 메서드가 따로 없어서 이렇게 사용해야되!!
+			//cookie.setMaxAge(60*60*24);
+			Cookie[] cookies = req.getCookies();
+			for(Cookie cookie : cookies){
+				//cookie 이름이 remember, usrId일 경우 maxage를 -1로 설정하여 쿠키를 유효하지 않도록 설정
+				System.out.println(cookie.getName());
+				if(cookie.getName().equals("remember") || cookie.getName().equals("userId")){
+					cookie.setMaxAge(0);
+					resp.addCookie(cookie);
+				}
+			}
+			
+		}
+		//rememberMe != null : 아이디 기억 사용
+		else{
+			//response 객체에 쿠키를 저장
+			Cookie cookie = new Cookie("remember", "Y");
+			Cookie userIdCookie = new Cookie("userId", userId);
+			
+			resp.addCookie(cookie);
+			resp.addCookie(userIdCookie);
+		}
 		
 		//2. db에서 조회해온 아이디, 비밀번호를 체크한다.(db는 상수로 임시 대체) => DB로 대체
 		// 2-1 사용자가 전송한 userId 파라미터로 사용자 정보 조회
