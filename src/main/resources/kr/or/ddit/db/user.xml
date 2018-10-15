@@ -47,5 +47,35 @@
 		where userId = #{userId}
 	</delete>
 	
-	
+	<!-- 사용자 정보 수정 -->
+	 <update id="updateUser" parameterType="userVo">
+		update jspuser
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="pass != null"> pass = #{pass},</if>
+			<if test="name != null"> name = #{name},</if>
+			<if test="addr1 != null"> addr1 = #{addr1},</if>
+			<if test="addr2 != null"> addr2 = #{addr2},</if>
+			<if test="zipcd != null"> zipcd = #{zipcd],</if>
+			<if test="email != null"> email = #{email},</if>
+			<if test="tel != null"> tel = #{tel},</if>
+			<if test="birth != null"> birth = #{birth},</if>
+			<if test="profile != null"> profile = #{profile}</if>
+		</trim>
+		where userId = #{userId}
+	</update>
+
+	<!-- <update id="updateUser" parameterType="userVo">
+		update jspuser
+		set pass= #{pass}
+			, name = #{name}
+			, addr1 = #{addr1}
+			, addr2 = #{addr2}
+			, zipcd = #{zipcd}
+			, email = #{email}
+			, tel = #{tel}
+			, birth = #{birth}
+			, profile = #{profile}
+		where userId = #{userId}
+	</update>
+	 -->
 </mapper>

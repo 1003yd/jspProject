@@ -42,6 +42,17 @@ public interface UserDaoInf {
 	*/
 	public int deleteUser(String userId);
 	
+	/**  
+	* Method   : updateUser 
+	* 작성자 : 1003yd 
+	* 변경이력 :  
+	* @param userVo
+	* @return  
+	* Method 설명 :  사용자 정보 수정
+	*/
+	public int updateUser(UserVO userVo);
+
+	
 	
 	
 

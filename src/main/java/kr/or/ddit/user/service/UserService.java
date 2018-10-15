@@ -56,6 +56,12 @@ public class UserService implements UserServiceInf{
 		return userDao.insertUser(userVo);
 	}
 
+	@Override
+	public int updateUser(UserVO userVo) {
+		// TODO Auto-generated method stub
+		return userDao.updateUser(userVo);
+	}
+
 
 	
 	

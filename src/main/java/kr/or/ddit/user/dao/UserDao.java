@@ -123,4 +123,25 @@ public class UserDao implements UserDaoInf {
 		
 		return deleteCnt;
 	}
+
+	/**  
+	* Method   : updateUser 
+	* 작성자 : 1003yd 
+	* 변경이력 :  
+	* @param userVo
+	* @return  
+	* Method 설명 : 사용자 정보 수정 
+	*/
+	@Override
+	public int updateUser(UserVO userVo) {
+		// TODO Auto-generated method stub
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session = factory.openSession();
+		
+		int updateUserCnt = session.update("user.updateUser", userVo);
+		session.commit();
+		session.close();
+		
+		return updateUserCnt;
+	}
 }
