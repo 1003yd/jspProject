@@ -21,7 +21,7 @@ public class StringUtil {
 		String cookieValue = "";
 		for(String str : cookieArray){
 			// 생각해보니깐 contains를 사용하게 되면 저 문자를 포함한 다른 애들도 포함이 되서 올것같아
-			if(str.contains(string)){
+			if(str.contains(string+"=")){
 				String[] array = str.split("=");
 				cookieValue = array[1];
 			}
