@@ -54,7 +54,6 @@
 
 	<h2>core choose : 실질적인 if 구문</h2>
 	<c:choose>
-	
 		<c:when test="${code == '00'}"> 공공</c:when>
 		<c:when test="${code == '01'}"> 공일</c:when>
 		<c:when test="${code == '02'}"> 공이</c:when>

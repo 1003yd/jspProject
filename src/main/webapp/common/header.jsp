@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="kr.or.ddit.user.model.UserVO"%>
+<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core"%>
+
+<script type="text/javascript">
+	var test = "${S_USER.name}"
+</script>
+
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
@@ -12,18 +18,9 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<%
-				UserVO userVo = (UserVO) session.getAttribute("userVo"); 
-					if(userVo == null){
-			%>		
-				<a class="navbar-brand" href="#">로그인 하세요</a>
-			<% 
-					}else{
-			%>
-				<%=userVo.getName() + "님 안녕하세요 "%>
-			<% 			
-					}
-			%>
+			<c:if test="${S_USER.name!= null}">
+				${S_USER.name} 님 안녕하세요 
+			</c:if>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">

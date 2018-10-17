@@ -3,15 +3,16 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <head>
 <%@ include file="/common/basicLib.jsp"%>
 
 <style type="text/css">
-	.userClick{
-		cursor : pointer;
-	}
-	
+.userClick {
+	cursor: pointer;
+}
 </style>
 
 
@@ -57,25 +58,39 @@
 									<th>사용자 이름</th>
 									<th>생일</th>
 								</tr>
-								<%
+
+								<%-- <%
 									List<UserVO> userList = (List) request.getAttribute("pageUserList");
 									int index = 1;
 									for (UserVO uservo : userList) {
 										SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 								%>
-								
+
 								<tr class="userClick">
 									<td><%=uservo.getRnum()%></td>
 									<td><%=uservo.getUserId()%></td>
 									<td><%=uservo.getName()%></td>
 									<td><%=sdf.format(uservo.getBirth())%></td>
 								</tr>
-								
+
 
 								<%
 									index++;
 									}
-								%>
+								%> --%>
+
+								<c:forEach items="${pageUserList}" var="user">
+									<tr class="userClick">
+										<td>${user.rnum}</td>
+										<td>${user.userId}</td>
+										<td>${user.name}</td>
+										<td><fmt:formatDate value="${user.birth}"
+												pattern="yyyy-MM-dd" /></td>
+									</tr>
+
+								</c:forEach>
+
+
 							</table>
 						</div>
 
@@ -84,10 +99,10 @@
 						<div class="text-center">
 
 							<ul class="pagination">
-								<li><a href="#" aria-label="Previous"> <span
+								<li><a href="/userPageList?page=1&pageSize=10" aria-label="Previous"> <span
 										aria-hidden="true">&laquo;</span>
 								</a></li>
-								<%
+								<%-- <%
 								int pageCnt = (Integer)request.getAttribute("pageCnt");
 								for(int p = 1; p <= pageCnt ; p++){
 									
@@ -97,8 +112,14 @@
 								<%
 								}
 								%>
-								<li><a href="/userPageList?page=<%=pageCnt%>&pageSize=10" aria-label="Next"> <span
-										aria-hidden="true">&raquo;</span>
+								<li><a href="/userPageList?page=<%=pageCnt%>&pageSize=10"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li> --%>
+								<c:forEach begin="1" end="${pageCnt}" var="p">
+									<li><a href="/userPageList?page=${p}&pageSize=10">${p}</a></li>
+								</c:forEach>
+								<li><a href="/userPageList?page=${pageCnt}&pageSize=10"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 								</a></li>
 							</ul>
 						</div>

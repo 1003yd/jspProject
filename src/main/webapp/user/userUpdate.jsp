@@ -3,6 +3,9 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <head>
 <%@ include file="/common/basicLib.jsp"%>
@@ -14,23 +17,24 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <!-- jquery ui api -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<%
+<%-- <%
 	UserVO user = (UserVO)request.getAttribute("userVo");
 	//String userId = request.getParameter("userId");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-%>
+%> --%>
 <script>
 	$(document).ready(function() {
 		//개발 과정에서 사용한 기본  값 설정
-		$("#userId").val("<%=user.getUserId()%>");
-		$("#pass").val("<%=user.getPass()%>");
-		$("#name").val("<%=user.getName()%>");
-		$("#addr1").val("<%=user.getAddr1()%>");
-		$("#addr2").val("<%=user.getAddr2()%>");
-		$("#zipcd").val("<%=user.getZipcd()%>");
-		$("#email").val("<%=user.getEmail()%>");
-		$("#birth").val("<%=sdf.format(user.getBirth())%>");
-		$("#tel").val("<%=user.getTel()%>");
+		$("#userId").val("${userVo.userId}");
+		$("#pass").val("${userVo.pass}");
+		$("#name").val("${userVo.name}");
+		$("#addr1").val("${userVo.addr1}");
+		$("#addr2").val("${userVo.addr2}");
+		$("#zipcd").val("${userVo.zipcd}");
+		$("#email").val("${userVo.email}");
+		// 여기는 jsp 구역이므로  jstl 태그를 사용할 수 없어
+		//$("#birth").val("${userVo.birth}");  => formatDate를 사용하기 위해 input 태그에서 직접 value 값을 지정해 줬어
+		$("#tel").val("${userVo.tel}");
 		
 		
 		
@@ -82,21 +86,24 @@
 
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<!-- 파일을 parameter로 넘겨주기 위해서 enctype="multipart/form-data" 반드시 사용해야함 -->
-				<form action="/userUpdateServlet" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+				<!-- 파일을 parameter로 넘겨주기 위해서 enctype="multipart/form-data" 반드시 사용해야함 -->
+				<form action="/userUpdateServlet" method="post"
+					class="form-horizontal" role="form" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
-							<img id="image" src="<%=user.getProfile()== null ? "/profile/noimage.png" : user.getProfile()%>">
-							<br>
-							<br>
-							<input type="file" id="profile" name="profile" value="" onchange="fileClick()">
+							<c:if test="${userVo.profile} == null ">
+								<img id="image" src= "/profile/noimage.png">
+							</c:if>
+								<img id="image" src= "${userVo.profile}">
+							<br> <br> <input type="file" id="profile"
+								name="profile" value="" onchange="fileClick()">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="userId" name="userId" 
+							<input type="text" class="form-control" id="userId" name="userId"
 								placeholder="사용자 아이디" readonly="readonly">
 						</div>
 					</div>
@@ -148,7 +155,7 @@
 						<label for="pass" class="col-sm-2 control-label">생년월일</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="birth" name="birth"
-								placeholder="생년월일">
+								placeholder="생년월일" value= "<fmt:formatDate value="${userVo.birth}"/>" />
 						</div>
 					</div>
 

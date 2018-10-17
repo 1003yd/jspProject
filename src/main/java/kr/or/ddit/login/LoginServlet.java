@@ -90,7 +90,7 @@ public class LoginServlet extends HttpServlet{
 			
 			// 1-1 db로 session에 사용자 정보 설정
 			HttpSession session = req.getSession();
-			session.setAttribute("userVo", user);
+			session.setAttribute("S_USER", user);
 			//2.main.jsp
 			//body 영역에  이름[별명] 님 안녕하세요
 			//dispatch

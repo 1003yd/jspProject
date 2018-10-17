@@ -48,7 +48,7 @@
 	</delete>
 	
 	<!-- 사용자 정보 수정 -->
-	 <update id="updateUser" parameterType="userVo">
+	<!--  <update id="updateUser" parameterType="userVo">
 		update jspuser
 		<trim prefix="SET" suffixOverrides=",">
 			<if test="pass != null"> pass = #{pass},</if>
@@ -62,9 +62,9 @@
 			<if test="profile != null"> profile = #{profile}</if>
 		</trim>
 		where userId = #{userId}
-	</update>
+	</update> -->
 
-	<!-- <update id="updateUser" parameterType="userVo">
+	<update id="updateUser" parameterType="userVo">
 		update jspuser
 		set pass= #{pass}
 			, name = #{name}
@@ -74,8 +74,10 @@
 			, email = #{email}
 			, tel = #{tel}
 			, birth = #{birth}
+		<if test="profile != null">
 			, profile = #{profile}
+			</if>
 		where userId = #{userId}
 	</update>
-	 -->
+	 
 </mapper>
