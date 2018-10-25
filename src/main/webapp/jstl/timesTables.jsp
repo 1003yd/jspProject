@@ -11,13 +11,15 @@
 </head>
 <body>
 	<table border="1">
-	<c:forEach begin="1" end="9" var="dan" >
-		<tr>
-		<c:forEach begin="2" end="9" var="gob">
-			<td>${dan} * ${gob} = ${gob*dan}</td>
+		<c:forEach begin="1" end="9" var="dan">
+			<tr>
+				<!--  jstl에서 표현식은 불가능 -->
+			
+				<c:forEach begin="2" end="${param.number }" var="gob">
+					<td>${dan}* ${gob} = ${gob*dan}</td>
+				</c:forEach>
+			</tr>
 		</c:forEach>
-		</tr>
-	</c:forEach>
 		<%-- <%
 		for(int dan =1; dan< 10; dan ++ ){
 		%>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="kr.or.ddit.user.model.UserVO"%>
 <%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript">
 	var test = "${S_USER.name}"
@@ -19,7 +20,11 @@
 					class="icon-bar"></span>
 			</button>
 			<c:if test="${S_USER.name!= null}">
-				${S_USER.name} 님 안녕하세요 
+				<fmt:bundle basename="kr.or.ddit.resource.msg.msg">
+					<fmt:message key="visitor">
+						<fmt:param value="${S_USER.name}"></fmt:param>
+					</fmt:message>
+				</fmt:bundle>
 			</c:if>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
