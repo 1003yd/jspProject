@@ -38,6 +38,8 @@
 						</c:if>
 							<img src="${userVo.profile}"/>
 						</div>
+						
+						
 					</div>
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>

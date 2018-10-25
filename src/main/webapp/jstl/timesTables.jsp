@@ -11,7 +11,7 @@
 </head>
 <body>
 	<table border="1">
-	<c:forEach begin="1" end="9" var="dan">
+	<c:forEach begin="1" end="9" var="dan" >
 		<tr>
 		<c:forEach begin="2" end="9" var="gob">
 			<td>${dan} * ${gob} = ${gob*dan}</td>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.or.ddit.encrypt.sha.KISA_SHA256;
 import kr.or.ddit.user.model.UserVO;
 import kr.or.ddit.user.service.UserService;
 import kr.or.ddit.user.service.UserServiceInf;
@@ -73,7 +74,8 @@ public class LoginServlet extends HttpServlet{
 		
 		//이미 아이디가 검색되어 온것이기 때문에 아이디는 비교할 필요가 없고 검색된 아이디가 존재하지 않을경우 null 비교와
 		// 아이디가 존재할 때의 비밀번호가 일치하는 지만 확인을 해주면 된다.
-		if(user != null && user.getPass().equals(password)){
+		String encryptPass = KISA_SHA256.encrypt(password);
+		if(user != null && user.authPass(encryptPass)){
 			//3-1. 일치할 경우 main.jsp로 이동
 			//redirect
 //			resp.sendRedirect("main.jsp?userId=" + userId + "&password=" + password );
@@ -98,7 +100,7 @@ public class LoginServlet extends HttpServlet{
 			rd.forward(req, resp);
 		}else{
 			//3-2    불일치할 경우 login.jsp로 이동
-			resp.sendRedirect("/login.jsp");
+			resp.sendRedirect("/");
 		}
 		
 		
