@@ -8,11 +8,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.user.model.UserVO;
-import kr.or.ddit.user.service.UserService;
-import kr.or.ddit.user.service.UserServiceInf;
 
 public class LoginCheckFilter implements Filter {
 
@@ -26,7 +23,7 @@ public class LoginCheckFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		HttpSession session = 
+	
 		UserVO userVo = (UserVO)request.getAttribute("S_USER");
 		
 		if(userVo== null){
