@@ -50,9 +50,6 @@
 
     <!-- Custom styles for this template -->
     <link href="../css/signin.css" rel="stylesheet">
-    
-    
-	<script src="/js/jquery-3.3.1.min.js"></script>
   </head>
 
   <body class="text-center">

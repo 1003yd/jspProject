@@ -34,7 +34,8 @@
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
 						<c:if test="${userVo.profile == null }">
-							<img src="/profile/noimage.png"/>
+							<!-- <img src="/profile/noimage.png"/> -->
+							<img src="/fileDownload?userId=${userVo.userId}">
 						</c:if>
 							<img src="${userVo.profile}"/>
 						</div>
